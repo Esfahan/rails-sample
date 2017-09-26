@@ -5,7 +5,6 @@ bundle install --path ../store-cache
 bundle exec rspec spec
 
 ls
-cd ../
-
-ls
-ls store-cache
+echo 'store cache'
+ls ../store-cache
+echo 'end store cache'
