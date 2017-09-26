@@ -28,16 +28,21 @@ jobs:
 - name: rails-job
   public: true
   plan:
+    #- get: build-cache
+    #  trigger: true
     - get: rails-sample
       trigger: true
     - task: build
       file: rails-sample/ci/tasks/build.yml
+    - put: build-cache
+      params:
+        file: store-cache
 
 - name: capistrano-job
   public: true
   plan:
-    - get: build-cache
-      trigger: true
+    #- get: build-cache
+    #  trigger: true
     - get: rails-sample
       passed: [ rails-job ]
     - get: capistrano-sample
@@ -46,6 +51,6 @@ jobs:
       file: rails-sample/ci/tasks/deploy.yml
       params:
         GIT_SSH_KEY: {{github-private-key}}
-    - put: build-cache
-      params:
-        file: store-cache
+    #- put: build-cache
+    #  params:
+    #    file: store-cache

@@ -1,4 +1,6 @@
 #!/bin/bash
+ls
+echo build-cache
 cd rails-sample
 bundle install --path build-cache
 bundle exec rspec spec
