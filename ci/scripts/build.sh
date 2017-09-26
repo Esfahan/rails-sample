@@ -2,11 +2,10 @@
 ls
 echo build-cache
 cd rails-sample
-bundle install --path build-cache
+bundle install --path store-cache
 bundle exec rspec spec
 
 cd ../
-cp -rp build-cache store-cache
 
 ls build-cache
 ls store-cache
