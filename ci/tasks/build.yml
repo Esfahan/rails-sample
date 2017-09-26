@@ -7,7 +7,7 @@ image_resource:
     tag: 2.4.1
 inputs:
   - name: rails-sample
-  - name: build-cache
+  #- name: build-cache
 outputs:
   - name: store-cache
 run:
