@@ -14,6 +14,16 @@ resources:
     private_key: {{github-private-key}}
     branch: feature/concourse-ci
 
+- name: build-cache
+  type: s3
+  source:
+    access_key_id: {{aws-access-key}}
+    secret_access_key: {{aws-secret-key}}
+    bucket: {{aws-bucket}}
+    endpoint: {{aws-s3-endpoint}}
+    disable_ssl: true
+    use_v4: true
+
 jobs:
 - name: rails-job
   public: true
@@ -26,6 +36,8 @@ jobs:
 - name: capistrano-job
   public: true
   plan:
+    - get: build-cache
+      trigger: true
     - get: rails-sample
       passed: [ rails-job ]
     - get: capistrano-sample
@@ -34,3 +46,6 @@ jobs:
       file: rails-sample/ci/tasks/deploy.yml
       params:
         GIT_SSH_KEY: {{github-private-key}}
+    - put: build-cache
+      params:
+        file: store-cache
