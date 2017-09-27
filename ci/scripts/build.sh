@@ -1,4 +1,5 @@
 #!/bin/bash
+echo $CONCOURSE_TSA_HOST
 ls
 cd rails-sample
 bundle install --path ../store-cache
